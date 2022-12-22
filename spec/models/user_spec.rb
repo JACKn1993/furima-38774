@@ -59,7 +59,7 @@ RSpec.describe User, type: :model do
       @user.password = Faker::Internet.password(min_length: 129)
       @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
+      expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
     end
 
     it 'family_name_zenkakuが空では登録できない' do
@@ -89,25 +89,25 @@ RSpec.describe User, type: :model do
     it 'family_name_zenkakuが全角（漢字・ひらがな・カタカナ）以外では登録できない' do
       @user.family_name_zenkaku = 'test'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name zenkaku is invalid")
+      expect(@user.errors.full_messages).to include('Family name zenkaku is invalid')
     end
 
     it 'first_name_zenkakuが全角（漢字・ひらがな・カタカナ）以外では登録できない' do
       @user.first_name_zenkaku = 'test'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name zenkaku is invalid")
+      expect(@user.errors.full_messages).to include('First name zenkaku is invalid')
     end
 
     it 'family_name_zenkakuが全角（カタカナ）以外では登録できない' do
       @user.family_name_katakana = '山田'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name katakana is invalid")
+      expect(@user.errors.full_messages).to include('Family name katakana is invalid')
     end
 
     it 'first_name_zenkakuが全角（カタカナ）以外では登録できない' do
       @user.first_name_katakana = '太郎'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name katakana is invalid")
+      expect(@user.errors.full_messages).to include('First name katakana is invalid')
     end
 
     it 'birthdayが空では登録できない' do
