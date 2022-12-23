@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   belongs_to :category
-  belongs_to :condetion
+  belongs_to :condition
   belongs_to :shipping
   belongs_to :prefecture
   belongs_to :until_shipping
@@ -16,6 +16,6 @@ class Item < ApplicationRecord
   validates :shipping_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :until_shipping_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :price, presence :true,format: { with: /\A[0-9]+\z/ }, numericality: {greater_than: 300,less_than: 9999999}
+  validates :price, presence: true,format: { with: /\A[0-9]+\z/ }, numericality: {greater_than: 300,less_than: 9999999}
 
 end
