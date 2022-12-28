@@ -11,7 +11,6 @@ class RopAddress
     validates :address
     validates :tel, numericality: {only_integer: true}, length: { is: 11 }
   end
-  validates :building_name
 
   def save
     rop = Rop.create(user_id: user_id, item_id: item_id)
