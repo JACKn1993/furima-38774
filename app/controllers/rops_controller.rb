@@ -3,6 +3,7 @@ class RopsController < ApplicationController
   
   def index
     @rop_address = RopAddress.new
+    @item = Item.find(params[:item_id])
   end
 
   def create
