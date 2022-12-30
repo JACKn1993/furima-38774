@@ -61,6 +61,12 @@ RSpec.describe RopAddress, type: :model do
             expect(@rop_address.errors.full_messages).to include("Tel is not a number")
           end
 
+          it 'tokenが空だと保存できないこと' do
+            @rop_address.token = ''
+            @rop_address.valid?
+            expect(@rop_address.errors.full_messages).to include("Token can't be blank")
+          end
+
           it 'userが紐付いていないと保存できないこと' do
             @rop_address.user_id = nil
             @rop_address.valid?
