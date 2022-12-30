@@ -1,6 +1,5 @@
 const pay = () => {
-  const pay = () => {
-    Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
   const submit = document.getElementById("button");
   submit.addEventListener("click", (e) => {
     e.preventDefault();
@@ -14,6 +13,7 @@ const pay = () => {
       exp_year: `20${formData.get("rop_address[exp_year]")}`,
       cvc: formData.get("rop_address[cvc]"),
     };
+    
 
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
@@ -23,15 +23,14 @@ const pay = () => {
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
 
-      document.getElementById("card_number").removeAttribute("name");
+      document.getElementById("card-number").removeAttribute("name");
       document.getElementById("card-exp-month").removeAttribute("name");
       document.getElementById("card-exp-year").removeAttribute("name");
       document.getElementById("card-cvc").removeAttribute("name");
 
       document.getElementById("charge-form").submit();
-      });
     });
-  }
+  });
 };
 
 window.addEventListener("load", pay);

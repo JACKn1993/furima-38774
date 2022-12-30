@@ -1,6 +1,6 @@
 class RopAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipality, :address, :building_name, :tel
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :municipality, :address, :building_name, :tel, :token
 
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class RopAddress
     validates :municipality
     validates :address
     validates :tel, numericality: {only_integer: true}, length: { is: 11 }
+    validates :token
   end
 
   def save
