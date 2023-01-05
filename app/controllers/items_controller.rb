@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_item_params, only: [:show, :edit, :update, :destroy]
   before_action :anlyze_user, only: [:edit, :destroy]
+  before_action :check_available, only: [:edit]
 
   def index
     @items = Item.includes( :user ).order("created_at DESC")
@@ -54,6 +55,12 @@ class ItemsController < ApplicationController
 
   def anlyze_user
     unless @item.user == current_user
+      redirect_to root_path
+    end
+  end
+
+  def check_available
+    if @item.rop.present?
       redirect_to root_path
     end
   end
