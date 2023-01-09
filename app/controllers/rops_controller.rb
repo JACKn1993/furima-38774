@@ -4,7 +4,6 @@ class RopsController < ApplicationController
   before_action :check_available, only: [:index]
   before_action :anlyze_user, only: [:index]
 
-  
   def index
     @rop_address = RopAddress.new
   end
@@ -20,10 +19,12 @@ class RopsController < ApplicationController
     end
   end
 
-
   private
+
   def rop_params
-    params.require(:rop_address).permit( :postal_code, :prefecture_id, :municipality, :address, :building_name, :tel ).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
+    params.require(:rop_address).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :tel).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def set_item_params
@@ -31,25 +32,20 @@ class RopsController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     price = Item.find(params[:item_id]).price
     Payjp::Charge.create(
       amount: price,
       card: rop_params[:token],
-      currency:'jpy'
+      currency: 'jpy'
     )
- end
-
- def check_available
-  if @item.rop.present?
-    redirect_to root_path
   end
-end
 
-def anlyze_user
-  if @item.user == current_user
-    redirect_to root_path
+  def check_available
+    redirect_to root_path if @item.rop.present?
   end
-end
 
+  def anlyze_user
+    redirect_to root_path if @item.user == current_user
+  end
 end

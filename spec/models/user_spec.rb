@@ -6,7 +6,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
-
     context 'ユーザ登録ができる時' do
       it 'nicknameとemail、password、password_confirmation、family_name_zenkaku、first_name_zenkaku、family_name_katakana、first_name_katakanaが存在すれば登録できる' do
         expect(@user).to be_valid
@@ -36,21 +35,21 @@ RSpec.describe User, type: :model do
         @user.password = 'testtest'
         @user.password_confirmation = 'testtest'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it '数字のみのパスワードでは登録できない' do
         @user.password = '123456'
         @user.password_confirmation = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it '全角文字を含むパスワードでは登録できない' do
         @user.password = 'テストtest123'
         @user.password_confirmation = 'テストtest123'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
       it 'passwordとpassword_confirmationが不一致では登録できない' do
