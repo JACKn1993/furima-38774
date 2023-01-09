@@ -4,7 +4,7 @@ RSpec.describe RopAddress, type: :model do
   describe '商品購入' do
     before do
       item = FactoryBot.create(:item)
-      @rop_address = FactoryBot.build(:rop_address, user_id: item.user_id, item_id: item.id)
+      @rop_address = FactoryBot.build(:rop_address, user_id: item.user_id, item_id: item.id, token: "a1a1a1")
         end
 
         context '内容に問題ない場合' do
