@@ -48,16 +48,16 @@
 
 - belongs_to :item
 - belongs_to :user
-- has_one :shipping_address
+- has_one :address
 
 
-## shipping_addresses テーブル
+## addresses テーブル
 
 | Column         | Type       | Options                        |
 |----------------|------------|--------------------------------|
 | postal_code    | string     | null: false                    |
 | prefecture_id  | integer    | null: false                    |
-| municipalities | string     | null: false                    |
+| municipality   | string     | null: false                    |
 | address        | string     | null: false                    |
 | building_name  | string     |                                |
 | tel            | string     | null: false                    |

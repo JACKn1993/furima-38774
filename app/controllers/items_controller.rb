@@ -2,9 +2,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_item_params, only: [:show, :edit, :update, :destroy]
   before_action :anlyze_user, only: [:edit, :destroy]
+  before_action :check_available, only: [:edit]
 
   def index
-    @items = Item.includes( :user ).order("created_at DESC")
+    @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -35,17 +36,18 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-      if @item.destroy
-        redirect_to root_path
-      else
-        redirect_to root_path
-      end
+    if @item.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 
-
   private
+
   def item_params
-    params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :shipping_id, :prefecture_id, :until_shipping_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :name, :description, :category_id, :condition_id, :shipping_id, :prefecture_id,
+                                 :until_shipping_id, :price).merge(user_id: current_user.id)
   end
 
   def set_item_params
@@ -53,10 +55,10 @@ class ItemsController < ApplicationController
   end
 
   def anlyze_user
-    unless @item.user == current_user
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.user == current_user
+  end
+
+  def check_available
+    redirect_to root_path if @item.rop.present?
   end
 end
-
-
