@@ -9,7 +9,7 @@ class RopAddress
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :municipality
     validates :address
-    validates :tel, numericality: { only_integer: true }, length: { is: 11 }
+    validates :tel, length: { in: 10..11 }, format: { with: /\A[0-9]+\z/ }
     validates :token
   end
 

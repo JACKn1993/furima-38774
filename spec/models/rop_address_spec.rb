@@ -4,7 +4,7 @@ RSpec.describe RopAddress, type: :model do
   describe '商品購入' do
     before do
       item = FactoryBot.create(:item)
-      @rop_address = FactoryBot.build(:rop_address, user_id: item.user_id, item_id: item.id, token: 'a1a1a1')
+      @rop_address = FactoryBot.build(:rop_address, user_id: item.user_id, item_id: item.id)
     end
 
     context '内容に問題ない場合' do
@@ -58,7 +58,19 @@ RSpec.describe RopAddress, type: :model do
       it 'telが半角数値のみの正しい形式でないと保存できないこと' do
         @rop_address.tel = '090-1234-5678'
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include('Tel is not a number')
+        expect(@rop_address.errors.full_messages).to include('Tel is invalid')
+      end
+
+      it 'telがが9桁以下では保存できないこと' do
+        @rop_address.tel = '090123456'
+        @rop_address.valid?
+        expect(@rop_address.errors.full_messages).to include('Tel is too short (minimum is 10 characters)')
+      end
+
+      it 'telが12桁以上では保存できないこと' do
+        @rop_address.tel = '090123456789'
+        @rop_address.valid?
+        expect(@rop_address.errors.full_messages).to include('Tel is too long (maximum is 11 characters)')
       end
 
       it 'tokenが空だと保存できないこと' do

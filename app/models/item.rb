@@ -10,14 +10,16 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :until_shipping
 
-  validates :image, presence: true
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :category_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :condition_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :until_shipping_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
-  validates :price, presence: true, format: { with: /\A[0-9]+\z/ },
-                    numericality: { only_integer: true, greater_than: 299, less_than: 9_999_999 }
+  with_options presence: true do
+    validates :image
+    validates :name
+    validates :description
+    validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :shipping_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :until_shipping_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :price, format: { with: /\A[0-9]+\z/ },
+                      numericality: { only_integer: true, greater_than: 299, less_than: 9_999_999 }
+  end
 end
