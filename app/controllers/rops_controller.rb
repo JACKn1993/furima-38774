@@ -1,6 +1,9 @@
 class RopsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item_params
+  before_action :check_available, only: [:index]
+  before_action :anlyze_user, only: [:index]
+
   
   def index
     @rop_address = RopAddress.new
@@ -36,4 +39,17 @@ class RopsController < ApplicationController
       currency:'jpy'
     )
  end
+
+ def check_available
+  if @item.rop.present?
+    redirect_to root_path
+  end
+end
+
+def anlyze_user
+  if @item.user == current_user
+    redirect_to root_path
+  end
+end
+
 end
