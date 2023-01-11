@@ -20,6 +20,6 @@ class Item < ApplicationRecord
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :until_shipping_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :price, format: { with: /\A[0-9]+\z/ },
-                      numericality: { only_integer: true, greater_than: 299, less_than: 9_999_999 }
+                      numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
   end
 end
