@@ -14,11 +14,11 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :description
-    validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :shipping_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :until_shipping_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :category_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :condition_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :shipping_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :prefecture_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :until_shipping_id, numericality: { other_than: 1, message: "を入力してください" }
     validates :price, format: { with: /\A[0-9]+\z/ },
                       numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
   end

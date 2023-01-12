@@ -22,73 +22,73 @@ RSpec.describe RopAddress, type: :model do
       it 'postal_codeが空だと保存できないこと' do
         @rop_address.postal_code = ''
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("Postal code can't be blank")
+        expect(@rop_address.errors.full_messages).to include("郵便番号を入力してください")
       end
 
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @rop_address.postal_code = '1234567'
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@rop_address.errors.full_messages).to include('郵便番号は半角数字、ハイフンを含めて入力してください')
       end
 
       it 'prefectureを選択していないと保存できないこと' do
         @rop_address.prefecture_id = 1
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@rop_address.errors.full_messages).to include("都道府県を入力してください")
       end
 
       it 'municipalityが空だと保存できないこと' do
         @rop_address.municipality = ''
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("Municipality can't be blank")
+        expect(@rop_address.errors.full_messages).to include("市区町村を入力してください")
       end
 
       it 'addressが空だと保存できないこと' do
         @rop_address.address = ''
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("Address can't be blank")
+        expect(@rop_address.errors.full_messages).to include("番地を入力してください")
       end
 
       it 'telが空だと保存できないこと' do
         @rop_address.tel = ''
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("Tel can't be blank")
+        expect(@rop_address.errors.full_messages).to include("電話番号を入力してください")
       end
 
       it 'telが半角数値のみの正しい形式でないと保存できないこと' do
         @rop_address.tel = '090-1234-5678'
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include('Tel is invalid')
+        expect(@rop_address.errors.full_messages).to include('電話番号は不正な値です')
       end
 
       it 'telがが9桁以下では保存できないこと' do
         @rop_address.tel = '090123456'
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include('Tel is too short (minimum is 10 characters)')
+        expect(@rop_address.errors.full_messages).to include('電話番号は10文字以上で入力してください')
       end
 
       it 'telが12桁以上では保存できないこと' do
         @rop_address.tel = '090123456789'
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include('Tel is too long (maximum is 11 characters)')
+        expect(@rop_address.errors.full_messages).to include('電話番号は11文字以内で入力してください')
       end
 
       it 'tokenが空だと保存できないこと' do
         @rop_address.token = ''
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("Token can't be blank")
+        expect(@rop_address.errors.full_messages).to include("正しいクレジットカード情報を入力してください")
       end
 
       it 'userが紐付いていないと保存できないこと' do
         @rop_address.user_id = nil
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("User can't be blank")
+        expect(@rop_address.errors.full_messages).to include("Userを入力してください")
       end
 
       it 'itemが紐付いていないと保存できないこと' do
         @rop_address.item_id = nil
         @rop_address.valid?
-        expect(@rop_address.errors.full_messages).to include("Item can't be blank")
+        expect(@rop_address.errors.full_messages).to include("Itemを入力してください")
       end
     end
   end
